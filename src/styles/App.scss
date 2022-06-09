@@ -1,0 +1,31 @@
+#app {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  color: #012E40;
+  background-color: #8FADBF;
+  font-size: 18px;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+nav {
+  padding: 10px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #296b49;
+    }
+  }
+}
