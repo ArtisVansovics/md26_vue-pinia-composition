@@ -1,0 +1,13 @@
+.nav {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 60px;
+  width: 100%;
+  min-height: 8vh;
+  padding: 10px;
+  font-size: 20px;
+  text-transform: uppercase;
+  background-color: #0D0D0D;
+}
