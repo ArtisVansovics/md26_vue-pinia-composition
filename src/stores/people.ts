@@ -37,23 +37,3 @@ export const usePeopleStore = defineStore({
     },
   },
 });
-
-// actions: {
-//   setNameQuery(query: string) {
-//     this.nameQuery = query;
-//   },
-//   async getPeople() {
-//     this.peopleData = {} as PeopleData;
-//     this.isLoading = true;
-//
-//     try {
-//       this.peopleData = await swapiPeople
-//         .get<PeopleData>(`/?search=${this.nameQuery}`)
-//         .then((response) => response.data);
-//     } catch (error) {
-//       this.error = error;
-//     } finally {
-//       this.isLoading = false;
-//     }
-//   },
-// },
