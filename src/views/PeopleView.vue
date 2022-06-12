@@ -1,7 +1,7 @@
 <template>
   <h1>People</h1>
-  <form v-on:submit.prevent="getPeople(queryValue)">
-    <input type="text" v-model="queryValue" />
+  <form v-on:submit.prevent="handleSearch">
+    <input type="text" v-model="inputValue" />
     <button>Search</button>
   </form>
   <p v-if="isLoading">Loading...</p>
@@ -19,7 +19,7 @@ import { storeToRefs } from "pinia";
 export default defineComponent({
   name: "PeopleView",
   setup() {
-    const queryValue = ref("");
+    const inputValue = ref("");
     const { peopleData, isLoading, error } = storeToRefs(usePeopleStore());
     const { getPeople } = usePeopleStore();
 
@@ -27,14 +27,19 @@ export default defineComponent({
       return peopleData.value.results;
     });
 
+    const handleSearch = () => {
+      getPeople(inputValue.value);
+      inputValue.value = "";
+    };
+
     getPeople("");
 
     return {
       isLoading,
-      queryValue,
+      inputValue,
       people,
       error,
-      getPeople,
+      handleSearch,
     };
   },
 });
