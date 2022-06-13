@@ -1,0 +1,19 @@
+.card {
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
+  padding: 30px 30px 20px;
+  border-radius: 20px 5px;
+  background-color: #032059;
+  color: #F2EDE4;
+  box-shadow: #59110B 0 0 10px 2px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.name {
+  color: #F2D129;
+  font-size: 28px;
+  text-transform: uppercase;
+  padding-bottom: 20px;
+}
