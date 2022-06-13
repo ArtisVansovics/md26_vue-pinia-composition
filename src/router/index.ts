@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import PeopleView from "@/views/PeopleView/PeopleView.vue";
-import FilmsView from "@/views/FilmsView.vue";
+import FilmsView from "@/views/FilmsView/FilmsView.vue";
 import PlanetsView from "@/views/PlanetsView.vue";
 import PlanetView from "@/views/PlanetView.vue";
 
