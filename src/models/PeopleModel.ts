@@ -1,6 +1,6 @@
 export type PeopleData = {
   count: number;
-  next: string;
+  next: string | null;
   previous: string | null;
   results: Person[];
 };
