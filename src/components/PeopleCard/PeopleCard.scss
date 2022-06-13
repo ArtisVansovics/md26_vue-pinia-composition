@@ -1,0 +1,39 @@
+.card {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+  padding: 20px 30px;
+  border-radius: 10px 20px;
+  background-color: #F2EDE4;
+  color: #032059;
+  box-shadow: #F29F05 0 0 5px 3px;
+}
+
+.name {
+  text-align: right;
+  color: #59110B;
+  font-size: 28px;
+}
+
+.text {
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.with-numbers{
+  text-transform: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 15px;
+  text-transform: capitalize;
+  text-align: center;
+  width: 100%;
+
+  @media screen and (max-width: 786px) {
+    grid-template-columns: 1fr;
+  }
+}
