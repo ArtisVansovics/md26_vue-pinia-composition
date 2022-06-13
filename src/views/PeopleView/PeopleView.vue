@@ -6,7 +6,7 @@
   </form>
   <p v-if="isLoading">Loading...</p>
   <p v-if="error">{{ error.message }}</p>
-  <div class="grid">
+  <div v-if="people" class="grid">
     <PeopleCard
       v-for="{
         name,
