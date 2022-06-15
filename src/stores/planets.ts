@@ -13,7 +13,7 @@ interface PlanetState {
 }
 
 export const usePlanetStore = defineStore({
-  id: "people",
+  id: "planets",
   state: (): PlanetState => ({
     planetData: {} as PlanetData,
     isLoading: false,
@@ -26,8 +26,8 @@ export const usePlanetStore = defineStore({
       this.isLoading = true;
 
       try {
-        this.planetData = await swapiPlanets
-          .get<PlanetData>("")
+        this.planetData = await axios
+          .get<PlanetData>("https://swapi.dev/api/planets")
           .then((response) => response.data);
       } catch (error) {
         this.error = error;
