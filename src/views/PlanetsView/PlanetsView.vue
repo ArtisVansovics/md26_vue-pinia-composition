@@ -41,4 +41,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss" src="./PlanetView.scss" />
+<style scoped lang="scss" src="./PlanetsView.scss" />
