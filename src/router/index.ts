@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import PeopleView from "@/views/PeopleView/PeopleView.vue";
 import FilmsView from "@/views/FilmsView/FilmsView.vue";
-import PlanetsView from "@/views/PlanetView/PlanetsView.vue";
+import PlanetsView from "@/views/PlanetsView/PlanetsView.vue";
 import PlanetView from "@/views/PlanetView.vue";
 
 const router = createRouter({
@@ -9,6 +9,7 @@ const router = createRouter({
   routes: [
     {
       path: "/people",
+      alias: "/",
       name: "people",
       component: PeopleView,
     },
