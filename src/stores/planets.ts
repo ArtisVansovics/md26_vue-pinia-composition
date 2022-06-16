@@ -1,10 +1,6 @@
 import { defineStore } from "pinia";
-import axios from "axios";
 import type { PlanetData } from "@/models/PlanetsModel";
-
-const swapiPlanets = axios.create({
-  baseURL: "https://swapi.dev/api/planets",
-});
+import { swapiAxios } from "@/stores/people";
 
 interface PlanetState {
   planetData: PlanetData;
@@ -26,8 +22,8 @@ export const usePlanetStore = defineStore({
       this.isLoading = true;
 
       try {
-        this.planetData = await axios
-          .get<PlanetData>("https://swapi.dev/api/planets")
+        this.planetData = await swapiAxios
+          .get<PlanetData>("planets")
           .then((response) => response.data);
       } catch (error) {
         this.error = error;

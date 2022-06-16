@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import axios from "axios";
 import type { FilmData } from "@/models/FilmModel";
+import { swapiAxios } from "@/stores/people";
 
 interface FilmState {
   filmData: FilmData;
@@ -22,8 +22,8 @@ export const useFilmStore = defineStore({
       this.isLoading = true;
 
       try {
-        this.filmData = await axios
-          .get<FilmData>("https://swapi.dev/api/films")
+        this.filmData = await swapiAxios
+          .get<FilmData>("films")
           .then((response) => response.data);
       } catch (error) {
         this.error = error;

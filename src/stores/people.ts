@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import type { PeopleData } from "@/models/PeopleModel";
 
-const swapiPeople = axios.create({
-  baseURL: "https://swapi.dev/api/people",
+export const swapiAxios = axios.create({
+  baseURL: "https://swapi.dev/api/",
 });
 
 interface PeopleState {
@@ -26,8 +26,8 @@ export const usePeopleStore = defineStore({
       this.isLoading = true;
 
       try {
-        this.peopleData = await swapiPeople
-          .get<PeopleData>(`/?search=${query}`)
+        this.peopleData = await swapiAxios
+          .get<PeopleData>(`people/?search=${query}`)
           .then((response) => response.data);
       } catch (error) {
         this.error = error;
@@ -37,3 +37,26 @@ export const usePeopleStore = defineStore({
     },
   },
 });
+
+// async getData(
+//   url: string,
+//   param: string,
+//   currentStore: any,
+//   stateData: string
+// ) {
+//   const store = currentStore();
+//   this.isLoading = true;
+//
+//   try {
+//     store[stateData] = await swapiAxios
+//       .get(`${url}${param}`)
+//       .then((response) => response.data);
+//   } catch (error) {
+//     this.error = error;
+//   } finally {
+//     this.isLoading = false;
+//   }
+// },
+// getPeople(query: string) {
+//   this.getData("people/?search=", query, usePeopleStore, "peopleData");
+// },
