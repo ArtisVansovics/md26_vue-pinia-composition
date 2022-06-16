@@ -1,18 +1,21 @@
 <template>
   <h1>Films</h1>
-  <select v-model="sortValue">
-    <option disabled value="">Sort films by:</option>
-    <option
-      v-for="{ id, name, value } in filmSortOptions"
-      :key="id"
-      :value="value"
-    >
-      {{ name }}
-    </option>
-  </select>
+  <div class="row">
+    <select v-model="sortValue">
+      <option disabled value="">Sort films by:</option>
+      <option
+        v-for="{ id, name, value } in filmSortOptions"
+        :key="id"
+        :value="value"
+      >
+        {{ name }}
+      </option>
+    </select>
+    <button @click="setSortValue(sortValue)">Sort</button>
+  </div>
   <p v-if="isLoading">Loading...</p>
   <p v-if="error">{{ error.message }}</p>
-  <div v-if="films" class="grid">
+  <div v-if="sortedFilms" class="grid">
     <FilmCard
       v-for="{
         title,
@@ -21,7 +24,7 @@
         producer,
         release_date,
         opening_crawl,
-      } in films"
+      } in sortedFilms"
       :key="episode_id"
     >
       {{ title }}
@@ -35,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import { useFilmStore } from "@/stores/films";
 import { storeToRefs } from "pinia";
 import FilmCard from "@/components/FilmCard/FilmCard.vue";
@@ -74,39 +77,13 @@ export default defineComponent({
     ] as FilmOptions[],
   }),
   setup() {
-    const { isLoading, error, filmData } = storeToRefs(useFilmStore());
-    const { getFilms } = useFilmStore();
+    const { isLoading, error, sortedFilms } = storeToRefs(useFilmStore());
+    const { getFilms, setSortValue } = useFilmStore();
     const sortValue = ref("filmsByIdAscending");
-
-    const films = computed(() => {
-      let filmsSorted = filmData.value.results;
-
-      if (sortValue.value === "filmsByIdAscending") {
-        filmsSorted = filmsSorted.sort(
-          (filmA, filmB) => filmA.episode_id - filmB.episode_id
-        );
-      } else if (sortValue.value === "filmsByIdDescending") {
-        filmsSorted = filmsSorted.sort(
-          (filmA, filmB) => filmB.episode_id - filmA.episode_id
-        );
-      } else if (sortValue.value === "filmsByDateAscending") {
-        filmsSorted = filmsSorted.sort(
-          (filmA, filmB) =>
-            Date.parse(filmA.release_date) - Date.parse(filmB.release_date)
-        );
-      } else if (sortValue.value === "filmsByDateDescending") {
-        filmsSorted = filmsSorted.sort(
-          (filmA, filmB) =>
-            Date.parse(filmB.release_date) - Date.parse(filmA.release_date)
-        );
-      }
-
-      return filmsSorted;
-    });
 
     getFilms();
 
-    return { isLoading, error, films, sortValue };
+    return { isLoading, error, sortValue, setSortValue, sortedFilms };
   },
 });
 </script>
