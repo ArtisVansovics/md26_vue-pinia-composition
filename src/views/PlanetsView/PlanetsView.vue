@@ -23,7 +23,7 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { storeToRefs } from "pinia";
-import { usePlanetStore } from "@/stores/planets";
+import { usePlanetsStore } from "@/stores/planets";
 import PlanetCard from "@/components/PlanetCard/PlanetCard.vue";
 import CustomButton from "@/components/CustomButton/CustomButton.vue";
 
@@ -31,11 +31,11 @@ export default defineComponent({
   name: "PlanetsView",
   components: { CustomButton, PlanetCard },
   setup() {
-    const { isLoading, error, planetData } = storeToRefs(usePlanetStore());
-    const { getPlanets } = usePlanetStore();
+    const { isLoading, error, planetsData } = storeToRefs(usePlanetsStore());
+    const { getPlanets } = usePlanetsStore();
 
     const planets = computed(() => {
-      return planetData.value.results;
+      return planetsData.value.results;
     });
 
     function getId(url: string) {
