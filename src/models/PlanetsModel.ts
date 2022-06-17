@@ -1,4 +1,4 @@
-export type PlanetData = {
+export type PlanetsData = {
   count: number;
   next: string | null;
   previous: string | null;

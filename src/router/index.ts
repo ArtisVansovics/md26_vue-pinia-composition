@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import PeopleView from "@/views/PeopleView/PeopleView.vue";
 import FilmsView from "@/views/FilmsView/FilmsView.vue";
 import PlanetsView from "@/views/PlanetsView/PlanetsView.vue";
-import PlanetView from "@/views/PlanetView.vue";
+import PlanetView from "@/views/PlanetView/PlanetView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

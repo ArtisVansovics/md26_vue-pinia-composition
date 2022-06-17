@@ -1,29 +1,29 @@
 import { defineStore } from "pinia";
-import type { PlanetData } from "@/models/PlanetsModel";
+import type { PlanetsData } from "@/models/PlanetsModel";
 import { swapiAxios } from "@/stores/people";
 
-interface PlanetState {
-  planetData: PlanetData;
+interface PlanetsState {
+  planetsData: PlanetsData;
   isLoading: boolean;
   error: null | any;
 }
 
-export const usePlanetStore = defineStore({
+export const usePlanetsStore = defineStore({
   id: "planets",
-  state: (): PlanetState => ({
-    planetData: {} as PlanetData,
+  state: (): PlanetsState => ({
+    planetsData: {} as PlanetsData,
     isLoading: false,
     error: null,
   }),
   getters: {},
   actions: {
     async getPlanets() {
-      this.planetData = {} as PlanetData;
+      this.planetsData = {} as PlanetsData;
       this.isLoading = true;
 
       try {
-        this.planetData = await swapiAxios
-          .get<PlanetData>("planets")
+        this.planetsData = await swapiAxios
+          .get<PlanetsData>("planets")
           .then((response) => response.data);
       } catch (error) {
         this.error = error;
