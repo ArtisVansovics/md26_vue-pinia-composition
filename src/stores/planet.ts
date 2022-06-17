@@ -33,26 +33,3 @@ export const usePlanetStore = defineStore({
     },
   },
 });
-
-// async getData(
-//   url: string,
-//   param: string,
-//   currentStore: any,
-//   stateData: string
-// ) {
-//   const store = currentStore();
-//   this.isLoading = true;
-//
-//   try {
-//     store[stateData] = await swapiAxios
-//       .get(`${url}${param}`)
-//       .then((response) => response.data);
-//   } catch (error) {
-//     this.error = error;
-//   } finally {
-//     this.isLoading = false;
-//   }
-// },
-// getPeople(query: string) {
-//   this.getData("people/?search=", query, usePeopleStore, "peopleData");
-// },
