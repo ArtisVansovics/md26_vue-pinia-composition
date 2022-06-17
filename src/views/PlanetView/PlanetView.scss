@@ -1,0 +1,38 @@
+.title {
+  font-size: 50px;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  justify-items: center;
+
+  @media screen and (max-width: 786px){
+    grid-template-columns: 1fr;
+  }
+}
+
+.column {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.column__text {
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: #F29F05 1px solid;
+}
+
+.link {
+  color: #F2D129;
+  text-decoration: none;
+}
+
+.small-gap {
+  gap: 10px 20px;
+}
