@@ -1,8 +1,23 @@
 <template>
   <p v-if="isLoading">Loading...</p>
   <p v-if="error">{{ error.message }}</p>
-  <h1 class="title">{{ planetData.name }}</h1>
-  <custom-button>View image</custom-button>
+  <div class="row">
+    <CustomButton @click="goToPrevious" :is-disabled="id <= 1">
+      Previous planet
+    </CustomButton>
+    <h1 class="title">{{ planetData.name }}</h1>
+    <CustomButton @click="goToNext" :is-disabled="id >= 60">
+      Next planet
+    </CustomButton>
+  </div>
+  <custom-button :onClick="toggleImage">View image</custom-button>
+  <PlanetImage
+    v-if="showImage"
+    :diameter="planetData.diameter"
+    :water="planetData.surface_water"
+    :terrain="planetData.terrain"
+    :population="planetData.population"
+  />
   <p class="text">Population: {{ planetData.population }}</p>
   <div class="grid">
     <div class="column">
@@ -49,27 +64,55 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { usePlanetStore } from "@/stores/planet";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import CustomButton from "@/components/CustomButton/CustomButton.vue";
+import PlanetImage from "@/components/PlanetImage/PlanetImage.vue";
 
 export default defineComponent({
   name: "PlanetView",
-  components: { CustomButton },
+  components: { PlanetImage, CustomButton },
   setup() {
     const { isLoading, error, planetData } = storeToRefs(usePlanetStore());
     const { getPlanet } = usePlanetStore();
     const route = useRoute();
+    const router = useRouter();
+    const showImage = ref(false);
 
-    onMounted(() => {
-      const id = Number(route.params.id);
-
-      getPlanet(id);
+    const id = computed(() => {
+      return Number(route.params.id);
     });
 
-    return { isLoading, error, planetData };
+    onMounted(() => {
+      getPlanet(id.value);
+    });
+
+    function toggleImage() {
+      showImage.value = !showImage.value;
+    }
+
+    function goToPrevious() {
+      router.push(`/planets/${id.value - 1}`);
+      getPlanet(id.value - 1);
+    }
+
+    function goToNext() {
+      router.push(`/planets/${id.value + 1}`);
+      getPlanet(id.value + 1);
+    }
+
+    return {
+      isLoading,
+      error,
+      planetData,
+      showImage,
+      id,
+      toggleImage,
+      goToPrevious,
+      goToNext,
+    };
   },
 });
 </script>
