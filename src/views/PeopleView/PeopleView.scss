@@ -11,3 +11,21 @@
     grid-template-columns: 1fr;
   }
 }
+
+.form {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+}
+
+.input {
+  background-color: #032059;
+  color: #F2EDE4;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+
+  &:focus {
+    outline: #0367A6 2px solid;
+  }
+}

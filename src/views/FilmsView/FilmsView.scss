@@ -16,3 +16,16 @@
   display: flex;
   gap: 20px;
 }
+
+.select {
+  background-color: #032059;
+  color: #F2EDE4;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:focus {
+    outline: #0367A6 2px solid;
+  }
+}
