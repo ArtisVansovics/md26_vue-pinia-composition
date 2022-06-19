@@ -1,7 +1,7 @@
 <template>
   <p v-if="isLoading">Loading...</p>
   <p v-if="error" class="warning">{{ error.message }}</p>
-  <template v-if="!isLoading">
+  <template v-if="!isLoading && !error">
     <div class="row">
       <CustomButton @click="goToPrevious" :is-disabled="id <= 1">
         Previous planet
@@ -61,14 +61,14 @@
       </a>
     </div>
     <h2>Films {{ planetData.name }} appears in</h2>
-    <div class="grid small-gap">
+    <div class="column">
       <a
         v-for="url in planetData.films"
         :href="url"
         v-bind:key="url"
         class="link"
       >
-        {{ url }}
+        Episode {{ url.split("/").at(-2) }}
       </a>
     </div>
   </template>
