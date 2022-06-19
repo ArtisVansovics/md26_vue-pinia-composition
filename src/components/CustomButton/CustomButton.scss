@@ -1,17 +1,17 @@
 .button {
   border: none;
-  border-radius: 20px;
+  border-radius: 8px;
   cursor: pointer;
   user-select: none;
   padding: 10px 20px;
   background-color: #F29F05;
-  color: #0367A6;
+  color: #59110B;
   font-weight: 600;
   font-size: 20px;
-  transition: background-color 1s;
+  transition: background-color 0.7s;
 
   &:hover {
-    background-color: #0367A6;
+    background-color: #59110B;
     color: #F29F05;
   }
 
@@ -21,7 +21,7 @@
 
     &:hover {
       background-color: #F29F05;
-      color: #0367A6;
+      color: #59110B;
     }
   }
 }

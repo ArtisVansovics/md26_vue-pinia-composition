@@ -1,23 +1,24 @@
 <template>
-  <h1>Planets</h1>
   <p v-if="isLoading">Loading...</p>
   <p v-if="error">{{ error.message }}</p>
-  <div v-if="planets" class="grid">
-    <PlanetCard
-      v-for="{ name, climate, terrain, population, url } in planets"
-      :key="name"
-    >
-      {{ name }}
-      <template #climate>{{ climate }}</template>
-      <template #terrain>{{ terrain }}</template>
-      <template #population>{{ population }}</template>
-      <template #button>
-        <CustomButton @click="$router.push(`/planets/${getId(url)}`)">
-          Go to planet
-        </CustomButton>
-      </template>
-    </PlanetCard>
-  </div>
+  <template v-if="!isLoading && !error">
+    <div v-if="planets" class="grid">
+      <PlanetCard
+        v-for="{ name, climate, terrain, population, url } in planets"
+        :key="name"
+      >
+        {{ name }}
+        <template #climate>{{ climate }}</template>
+        <template #terrain>{{ terrain }}</template>
+        <template #population>{{ population }}</template>
+        <template #button>
+          <CustomButton @click="$router.push(`/planets/${getId(url)}`)">
+            Go to planet
+          </CustomButton>
+        </template>
+      </PlanetCard>
+    </div>
+  </template>
 </template>
 
 <script lang="ts">

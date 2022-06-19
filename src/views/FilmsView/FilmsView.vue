@@ -1,40 +1,41 @@
 <template>
-  <h1>Films</h1>
-  <div class="row">
-    <select v-model="sortValue">
-      <option disabled value="">Sort films by:</option>
-      <option
-        v-for="{ id, name, value } in filmSortOptions"
-        :key="id"
-        :value="value"
-      >
-        {{ name }}
-      </option>
-    </select>
-    <button @click="setSortValue(sortValue)">Sort</button>
-  </div>
   <p v-if="isLoading">Loading...</p>
   <p v-if="error">{{ error.message }}</p>
-  <div v-if="sortedFilms" class="grid">
-    <FilmCard
-      v-for="{
-        title,
-        episode_id,
-        director,
-        producer,
-        release_date,
-        opening_crawl,
-      } in sortedFilms"
-      :key="episode_id"
-    >
-      {{ title }}
-      <template #episodeId>{{ episode_id }}</template>
-      <template #director>{{ director }}</template>
-      <template #producer>{{ producer }}</template>
-      <template #releaseDate>{{ release_date }}</template>
-      <template #openingCrawl>{{ opening_crawl }}</template>
-    </FilmCard>
-  </div>
+  <template v-if="!isLoading && !error">
+    <div class="row">
+      <select v-model="sortValue" class="select">
+        <option disabled value="">Sort films by:</option>
+        <option
+          v-for="{ id, name, value } in filmSortOptions"
+          :key="id"
+          :value="value"
+        >
+          {{ name }}
+        </option>
+      </select>
+      <CustomButton @click="setSortValue(sortValue)">Sort</CustomButton>
+    </div>
+    <div v-if="sortedFilms" class="grid">
+      <FilmCard
+        v-for="{
+          title,
+          episode_id,
+          director,
+          producer,
+          release_date,
+          opening_crawl,
+        } in sortedFilms"
+        :key="episode_id"
+      >
+        {{ title }}
+        <template #episodeId>{{ episode_id }}</template>
+        <template #director>{{ director }}</template>
+        <template #producer>{{ producer }}</template>
+        <template #releaseDate>{{ release_date }}</template>
+        <template #openingCrawl>{{ opening_crawl }}</template>
+      </FilmCard>
+    </div>
+  </template>
 </template>
 
 <script lang="ts">
@@ -42,6 +43,7 @@ import { defineComponent, ref } from "vue";
 import { useFilmStore } from "@/stores/films";
 import { storeToRefs } from "pinia";
 import FilmCard from "@/components/FilmCard/FilmCard.vue";
+import CustomButton from "@/components/CustomButton/CustomButton.vue";
 
 type FilmOptions = {
   id: number;
@@ -51,7 +53,7 @@ type FilmOptions = {
 
 export default defineComponent({
   name: "FilmsView",
-  components: { FilmCard },
+  components: { CustomButton, FilmCard },
   data: () => ({
     filmSortOptions: [
       {

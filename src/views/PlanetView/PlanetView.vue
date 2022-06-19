@@ -107,11 +107,13 @@ export default defineComponent({
     function goToPrevious() {
       router.push(`/planets/${id.value - 1}`);
       getPlanet(id.value - 1);
+      showImage.value = false;
     }
 
     function goToNext() {
       router.push(`/planets/${id.value + 1}`);
       getPlanet(id.value + 1);
+      showImage.value = false;
     }
 
     return {
