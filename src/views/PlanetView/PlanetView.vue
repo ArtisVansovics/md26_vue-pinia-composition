@@ -1,66 +1,77 @@
 <template>
   <p v-if="isLoading">Loading...</p>
-  <p v-if="error">{{ error.message }}</p>
-  <div class="row">
-    <CustomButton @click="goToPrevious" :is-disabled="id <= 1">
-      Previous planet
-    </CustomButton>
-    <h1 class="title">{{ planetData.name }}</h1>
-    <CustomButton @click="goToNext" :is-disabled="id >= 60">
-      Next planet
-    </CustomButton>
-  </div>
-  <custom-button :onClick="toggleImage">View image</custom-button>
-  <PlanetImage
-    v-if="showImage"
-    :diameter="planetData.diameter"
-    :water="planetData.surface_water"
-    :terrain="planetData.terrain"
-    :population="planetData.population"
-  />
-  <p class="text">Population: {{ planetData.population }}</p>
-  <div class="grid">
-    <div class="column">
-      <h3>Planetary data</h3>
-      <p class="column__text">
-        Rotation period: {{ planetData.rotation_period }} hours
-      </p>
-      <p class="column__text">
-        Orbital period: {{ planetData.orbital_period }} standard days
-      </p>
-      <p class="column__text">Diameter: {{ planetData.diameter }} m</p>
+  <p v-if="error" class="warning">{{ error.message }}</p>
+  <template v-if="!isLoading">
+    <div class="row">
+      <CustomButton @click="goToPrevious" :is-disabled="id <= 1">
+        Previous planet
+      </CustomButton>
+      <h1 class="title">{{ planetData.name }}</h1>
+      <CustomButton @click="goToNext" :is-disabled="id >= 60">
+        Next planet
+      </CustomButton>
     </div>
-    <div class="column">
-      <h3>Environmental data</h3>
-      <p class="column__text">Climate conditions: {{ planetData.climate }}</p>
-      <p class="column__text">Terrain type: {{ planetData.terrain }}</p>
-      <p class="column__text">
-        Amount of surface water: {{ planetData.surface_water }}%
-      </p>
+    <custom-button :onClick="toggleImage">View image</custom-button>
+    <h3
+      v-if="
+        showImage &&
+        (planetData.diameter < 1 || planetData.diameter === 'unknown')
+      "
+      class="warning"
+    >
+      No image available!
+    </h3>
+    <PlanetImage
+      v-else-if="showImage"
+      :diameter="planetData.diameter"
+      :water="planetData.surface_water"
+      :terrain="planetData.terrain"
+      :population="planetData.population"
+    />
+    <p class="text">Population: {{ planetData.population }}</p>
+    <div class="grid">
+      <div class="column">
+        <h3>Planetary data</h3>
+        <p class="column__text">
+          Rotation period: {{ planetData.rotation_period }} hours
+        </p>
+        <p class="column__text">
+          Orbital period: {{ planetData.orbital_period }} standard days
+        </p>
+        <p class="column__text">Diameter: {{ planetData.diameter }} m</p>
+      </div>
+      <div class="column">
+        <h3>Environmental data</h3>
+        <p class="column__text">Climate conditions: {{ planetData.climate }}</p>
+        <p class="column__text">Terrain type: {{ planetData.terrain }}</p>
+        <p class="column__text">
+          Amount of surface water: {{ planetData.surface_water }}%
+        </p>
+      </div>
     </div>
-  </div>
-  <h2>Known residents</h2>
-  <div class="grid small-gap">
-    <a
-      v-for="url in planetData.residents"
-      :href="url"
-      v-bind:key="url"
-      class="link"
-    >
-      {{ url }}
-    </a>
-  </div>
-  <h2>Films {{ planetData.name }} appears in</h2>
-  <div class="grid small-gap">
-    <a
-      v-for="url in planetData.films"
-      :href="url"
-      v-bind:key="url"
-      class="link"
-    >
-      {{ url }}
-    </a>
-  </div>
+    <h2>Known residents</h2>
+    <div class="grid small-gap">
+      <a
+        v-for="url in planetData.residents"
+        :href="url"
+        v-bind:key="url"
+        class="link"
+      >
+        {{ url }}
+      </a>
+    </div>
+    <h2>Films {{ planetData.name }} appears in</h2>
+    <div class="grid small-gap">
+      <a
+        v-for="url in planetData.films"
+        :href="url"
+        v-bind:key="url"
+        class="link"
+      >
+        {{ url }}
+      </a>
+    </div>
+  </template>
 </template>
 
 <script lang="ts">

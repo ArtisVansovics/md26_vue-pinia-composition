@@ -66,6 +66,7 @@ export default defineComponent({
 
       return color;
     },
+
     style() {
       return (
         `width: ${this.planetDiameter}px;` +
