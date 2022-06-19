@@ -8,15 +8,24 @@ export default defineComponent({
   name: "PlanetImage",
   props: ["diameter", "water", "terrain", "population"],
   computed: {
-    diameterCalculated() {
+    planetDiameter() {
       return Number(this.diameter) * 0.01;
     },
+
+    waterCoverage() {
+      return Number(this.water) * 0.3;
+    },
+
+    planetTerrain() {
+      return this.terrain.split(",")[0];
+    },
+
     terrainColor() {
       let color = "";
 
-      this.terrain === "desert"
+      this.planetTerrain === "desert"
         ? (color = "#F29F05")
-        : this.terrain === "ocean"
+        : this.planetTerrain === "ocean"
         ? (color = "#0367A6")
         : null;
 
@@ -24,9 +33,9 @@ export default defineComponent({
     },
     style() {
       return (
-        `width: ${this.diameterCalculated}px;` +
-        `height: ${this.diameterCalculated}px;` +
-        `border-width: ${this.water}px;` +
+        `width: ${this.planetDiameter}px;` +
+        `height: ${this.planetDiameter}px;` +
+        `border-width: ${this.waterCoverage}px;` +
         `background-color: ${this.terrainColor};`
       );
     },

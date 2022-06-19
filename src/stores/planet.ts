@@ -18,7 +18,7 @@ export const usePlanetStore = defineStore({
   getters: {},
   actions: {
     async getPlanet(id: number) {
-      this.planetData = {} as Planet;
+      this.clearData();
       this.isLoading = true;
 
       try {
@@ -30,6 +30,9 @@ export const usePlanetStore = defineStore({
       } finally {
         this.isLoading = false;
       }
+    },
+    clearData() {
+      this.planetData = {} as Planet;
     },
   },
 });
