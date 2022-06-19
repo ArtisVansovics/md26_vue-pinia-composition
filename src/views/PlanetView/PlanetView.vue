@@ -49,6 +49,17 @@
         </p>
       </div>
     </div>
+    <h2>Films {{ planetData.name }} appears in</h2>
+    <div class="column small-gap">
+      <a
+        v-for="url in planetData.films"
+        :href="url"
+        v-bind:key="url"
+        class="link"
+      >
+        Episode {{ url.split("/").at(-2) }}
+      </a>
+    </div>
     <h2>Known residents</h2>
     <div class="grid small-gap">
       <a
@@ -58,17 +69,6 @@
         class="link"
       >
         {{ url }}
-      </a>
-    </div>
-    <h2>Films {{ planetData.name }} appears in</h2>
-    <div class="column">
-      <a
-        v-for="url in planetData.films"
-        :href="url"
-        v-bind:key="url"
-        class="link"
-      >
-        Episode {{ url.split("/").at(-2) }}
       </a>
     </div>
   </template>
