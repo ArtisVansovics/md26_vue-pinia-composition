@@ -12,9 +12,7 @@
         <template #terrain>{{ terrain }}</template>
         <template #population>{{ population }}</template>
         <template #button>
-          <CustomButton @click="$router.push(`/planets/${getId(url)}`)">
-            Go to planet
-          </CustomButton>
+          <CustomButton @click="goToPlanet(url)">Go to planet</CustomButton>
         </template>
       </PlanetCard>
     </div>
@@ -27,6 +25,7 @@ import { storeToRefs } from "pinia";
 import { usePlanetsStore } from "@/stores/planets";
 import PlanetCard from "@/components/PlanetCard/PlanetCard.vue";
 import CustomButton from "@/components/CustomButton/CustomButton.vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "PlanetsView",
@@ -34,6 +33,7 @@ export default defineComponent({
   setup() {
     const { isLoading, error, planetsData } = storeToRefs(usePlanetsStore());
     const { getPlanets } = usePlanetsStore();
+    const router = useRouter();
 
     const planets = computed(() => {
       return planetsData.value.results;
@@ -43,9 +43,13 @@ export default defineComponent({
       return url.split("/")[url.split("/").length - 2];
     }
 
+    function goToPlanet(url: string) {
+      router.push(`/planets/${getId(url)}`);
+    }
+
     getPlanets();
 
-    return { isLoading, error, planets, getId };
+    return { isLoading, error, planets, goToPlanet };
   },
 });
 </script>
