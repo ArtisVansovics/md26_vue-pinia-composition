@@ -11,10 +11,12 @@ export default defineComponent({
   name: "CustomButton",
   props: ["isDisabled"],
   emits: ["onClick"],
-  methods: {
-    clickHandler() {
-      this.$emit("onClick");
-    },
+  setup(props, { emit }) {
+    function clickHandler() {
+      emit("onClick");
+    }
+
+    return { clickHandler };
   },
 });
 </script>
