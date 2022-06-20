@@ -61,7 +61,7 @@
       </a>
     </div>
     <h2>Known residents</h2>
-    <div class="grid small-gap">
+    <div class="grid--auto">
       <a
         v-for="url in planetData.residents"
         :href="url"
